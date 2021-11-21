@@ -1,0 +1,35 @@
+overwrite: true
+schema: 
+  - './server/src/type-defs.ts'
+documents:
+  - 'client/src/**/*.vue'
+  - 'client/src/**/*.graphql'
+  - 'client/src/**/*.ts'
+generates:
+  ./server/src/generated/graphql/index.ts:
+    config:
+      typesPrefix: GQL_
+      maybeValue: T | null | undefined
+      namingConvention:
+        enumValues: constant-case#constantCase
+    plugins:
+      - add:
+          content:
+            - /* eslint-disable */
+      - 'typescript'
+      - 'typescript-resolvers'
+  
+  ./client/src/generated/graphql/index.ts:
+    config:
+      maybeValue: T | null | undefined
+      namingConvention:
+        enumValues: constant-case#constantCase
+      withCompositionFunctions: true
+      vueCompositionApiImportFrom: vue
+    plugins:
+      - add:
+          content:
+            - /* eslint-disable */    
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-vue-apollo'

@@ -1,0 +1,27 @@
+{
+  "name": "vue-apollo-experiment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cerino-ligutom/vue-apollo-experiment.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cerino-ligutom/vue-apollo-experiment/issues"
+  },
+  "homepage": "https://github.com/cerino-ligutom/vue-apollo-experiment#readme",
+  "devDependencies": {
+    "@graphql-codegen/cli": "^2.3.0",
+    "@graphql-codegen/typescript": "^2.4.1",
+    "@graphql-codegen/typescript-operations": "^2.2.1",
+    "@graphql-codegen/typescript-resolvers": "^2.4.2",
+    "@graphql-codegen/typescript-vue-apollo": "^3.2.1"
+  }
+}
