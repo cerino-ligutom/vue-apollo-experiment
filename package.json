@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "generate:gql": "graphql-codegen",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,7 +19,9 @@
   },
   "homepage": "https://github.com/cerino-ligutom/vue-apollo-experiment#readme",
   "devDependencies": {
+    "@graphql-codegen/add": "^3.1.0",
     "@graphql-codegen/cli": "^2.3.0",
+    "@graphql-codegen/schema-ast": "^2.4.0",
     "@graphql-codegen/typescript": "^2.4.1",
     "@graphql-codegen/typescript-operations": "^2.2.1",
     "@graphql-codegen/typescript-resolvers": "^2.4.2",

@@ -1,8 +1,7 @@
 overwrite: true
-schema: 
+schema:
   - './server/src/type-defs.ts'
 documents:
-  - 'client/src/**/*.vue'
   - 'client/src/**/*.graphql'
   - 'client/src/**/*.ts'
 generates:
@@ -10,6 +9,9 @@ generates:
     config:
       typesPrefix: GQL_
       maybeValue: T | null | undefined
+      enumValues: '../../enums/index' # relative to the generated file
+      scalars:
+        DateTime: Date
       namingConvention:
         enumValues: constant-case#constantCase
     plugins:
@@ -18,7 +20,7 @@ generates:
             - /* eslint-disable */
       - 'typescript'
       - 'typescript-resolvers'
-  
+
   ./client/src/generated/graphql/index.ts:
     config:
       maybeValue: T | null | undefined
@@ -29,7 +31,11 @@ generates:
     plugins:
       - add:
           content:
-            - /* eslint-disable */    
+            - /* eslint-disable */
       - 'typescript'
       - 'typescript-operations'
       - 'typescript-vue-apollo'
+
+  ./client/server-schema.graphql:
+    plugins:
+      - schema-ast

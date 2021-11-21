@@ -1,0 +1,62 @@
+input CreateUserInput {
+  birthDate: DateTime!
+  email: String!
+  name: String!
+}
+
+type CreateUserPayload {
+  user: User!
+}
+
+scalar DateTime
+
+type Mutation {
+  createUser(input: CreateUserInput!): CreateUserPayload!
+}
+
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+}
+
+type Query {
+  users(after: String, before: String, first: Int = 25, sortBy: UserSort!): UserConnection!
+}
+
+enum SortDirection {
+  ASC
+  DESC
+}
+
+type User {
+  birthDate: DateTime!
+  email: String!
+  id: ID!
+  name: String!
+}
+
+type UserConnection {
+  edges: [UserEdge]!
+  nodes: [User]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type UserEdge {
+  cursor: String!
+  node: User!
+}
+
+input UserSort {
+  direction: SortDirection!
+  field: UserSortField!
+}
+
+enum UserSortField {
+  BIRTH_DATE
+  EMAIL
+  ID
+  NAME
+}
