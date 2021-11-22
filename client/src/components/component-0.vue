@@ -160,8 +160,15 @@ export const Component0 = defineComponent({
        */
       refetch,
     } = useGetUsersQuery(customQueryVariables, {
-      // Side Note: You might want to look into this
-      // https://github.com/apollographql/apollo-client/issues/6916#issuecomment-811203002
+      /**
+       * There are multiple fetch policy options here and you might want to know each one of them.
+       * You should use what's appropriate for your use case.
+       * https://www.apollographql.com/docs/react/data/queries/#supported-fetch-policies
+       *
+       *
+       * On a side note, you might want to look into this as well:
+       * https://github.com/apollographql/apollo-client/issues/6916#issuecomment-811203002
+       */
       fetchPolicy: 'cache-and-network',
       nextFetchPolicy: 'cache-first',
 
