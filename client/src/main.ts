@@ -1,7 +1,8 @@
-import { createApp, provide, h } from "vue";
-import { DefaultApolloClient } from "@vue/apollo-composable";
-import App from "./app.vue";
-import { apolloClient } from "./plugins/apollo";
+import { createApp, provide, h } from 'vue';
+import { DefaultApolloClient } from '@vue/apollo-composable';
+import App from './app.vue';
+import { apolloClient } from './plugins/apollo';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const app = createApp({
   setup() {
@@ -11,4 +12,4 @@ const app = createApp({
   render: () => h(App),
 });
 
-app.mount("#app");
+app.mount('#app');

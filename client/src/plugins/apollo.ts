@@ -1,10 +1,10 @@
 // https://v4.apollo.vuejs.org/guide/installation.html#manual-installation
-import { ApolloClient, createHttpLink, InMemoryCache } from "@apollo/client/core";
+import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client/core';
 
 // HTTP connection to the API
 const httpLink = createHttpLink({
   // You should use an absolute URL here
-  uri: "http://localhost:3000/graphql",
+  uri: 'http://localhost:3000/graphql',
 });
 
 // Cache implementation

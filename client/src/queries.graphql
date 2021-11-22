@@ -4,6 +4,7 @@ query GetUsers($first: Int!, $before: String, $after: String, $sortBy: UserSort!
       id
       name
       email
+      birthDate
     }
     pageInfo {
       hasNextPage
