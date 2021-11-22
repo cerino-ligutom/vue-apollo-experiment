@@ -112,7 +112,7 @@ export type GetUsersQuery = { __typename?: 'Query', users: { __typename?: 'UserC
 
 export const GetUsersDocument = gql`
     query GetUsers($first: Int!, $before: String, $after: String, $sortBy: UserSort!) {
-  users(first: $first, before: $before, after: $after, sortBy: $sortBy) {
+  users(first: $first, before: $before, after: $after, sortBy: $sortBy) @connection(key: "users", filter: ["sortBy"]) {
     nodes {
       id
       name

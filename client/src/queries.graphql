@@ -1,5 +1,5 @@
 query GetUsers($first: Int!, $before: String, $after: String, $sortBy: UserSort!) {
-  users(first: $first, before: $before, after: $after, sortBy: $sortBy) {
+  users(first: $first, before: $before, after: $after, sortBy: $sortBy) @connection(key: "users", filter: ["sortBy"]) {
     nodes {
       id
       name
