@@ -24,7 +24,8 @@
     </div>
 
     <div class="col-md-3 fetch-more-btn-container">
-      <button @click="fetchMoreItems" type="button" class="btn btn-success" id="fetchMoreItems">Fetch More Items</button>
+      <button @click="fetchMoreItems()" type="button" class="btn btn-success">Fetch More</button>
+      <button @click="refetch()" type="button" class="btn btn-success">Refetch</button>
     </div>
   </div>
 
@@ -151,6 +152,13 @@ export const Component0 = defineComponent({
        * https://v4.apollo.vuejs.org/guide-composable/pagination.html#using-fetchmore
        */
       fetchMore,
+
+      /**
+       * You could use this if you have use cases like
+       * - retrying a failed query due to network issues (make sure to pass a variable to its parameter to refetch the same set of data)
+       * - just refetch the query from scratch (if no parameters are passed, it'll use the latest state of the variables)
+       */
+      refetch,
     } = useGetUsersQuery(customQueryVariables, {
       // Side Note: You might want to look into this
       // https://github.com/apollographql/apollo-client/issues/6916#issuecomment-811203002
@@ -291,6 +299,7 @@ export const Component0 = defineComponent({
       SortDirectionOptions: SortDirection,
       UserSortFieldOptions: UserSortField,
       fetchMoreItems,
+      refetch,
     };
   },
 });
