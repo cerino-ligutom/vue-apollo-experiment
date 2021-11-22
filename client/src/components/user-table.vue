@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <template v-if="!isLoading">
+      <template v-if="users.length > 0">
         <tr v-for="user in users" :key="user.id">
           <td>{{ user.id }}</td>
           <td>{{ user.name }}</td>
@@ -17,12 +17,12 @@
           <td>{{ formatDate(user.birthDate) }}</td>
         </tr>
       </template>
-      <template v-else>
-        <tr>
-          <td colspan="4" v-if="isLoading">~ L O A D I N G ~</td>
-          <td colspan="4" v-if="!isLoading && users.length === 0">No data.</td>
-        </tr>
-      </template>
+      <tr v-else>
+        <td colspan="4" v-if="!isLoading && users.length === 0">No data.</td>
+      </tr>
+      <tr v-if="isLoading">
+        <td colspan="4" v-if="isLoading"><h3>~ L O A D I N G ~</h3></td>
+      </tr>
     </tbody>
   </table>
 </template>
