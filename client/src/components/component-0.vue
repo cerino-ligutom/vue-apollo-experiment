@@ -24,7 +24,7 @@
     </div>
 
     <div class="col-md-3 fetch-more-btn-container">
-      <button @click="fetchMoreItems()" type="button" class="btn btn-success">Fetch More</button>
+      <button @click="fetchMoreItems()" type="button" class="btn btn-success me-1">Fetch More</button>
       <button @click="refetch()" type="button" class="btn btn-success">Refetch</button>
     </div>
   </div>
@@ -234,7 +234,7 @@ export const Component0 = defineComponent({
      *
      * This is the approach we'll be using in this demo as the type inference is more reliable.
      */
-    const usersFromComputed = computed<Array<UserQueryNode | undefined>>(() => result.value?.users.edges.map((x) => x?.node) ?? []);
+    const usersFromComputed = computed<Array<UserQueryNode | undefined>>(() => result.value?.users?.edges?.map((x) => x?.node) ?? []);
     const pageInfoFromComputed = computed<UserQueryPageInfo>(
       () =>
         result.value?.users?.pageInfo ?? {

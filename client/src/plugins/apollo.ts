@@ -65,7 +65,7 @@ const typePolicies: TypedTypePolicies = {
 
 // Cache implementation
 const cache = new InMemoryCache({
-  typePolicies,
+  typePolicies, // Just comment this if you want to test updateQuery() of fetchMore
 });
 
 // Create the apollo client

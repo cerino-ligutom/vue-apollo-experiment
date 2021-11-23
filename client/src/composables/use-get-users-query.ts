@@ -39,7 +39,7 @@ export function useGetUsersQuery(...params: Parameters<typeof _useGetUsersQuery>
       users: {
         ...previousResult.users,
         // Append the new data
-        edges: [...previousResult.users.edges, ...fetchMoreResult.users.edges],
+        edges: [...(previousResult.users.edges ?? []), ...fetchMoreResult.users.edges],
         // We want the new page info
         pageInfo: fetchMoreResult.users.pageInfo,
       },
