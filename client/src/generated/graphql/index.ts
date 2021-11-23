@@ -2,6 +2,7 @@
 import gql from 'graphql-tag';
 import * as VueApolloComposable from '@vue/apollo-composable';
 import * as VueCompositionApi from 'vue';
+import { FieldPolicy, FieldReadFunction, TypePolicies, TypePolicy } from '@apollo/client/cache';
 export type Maybe<T> = T | null | undefined;
 export type InputMaybe<T> = T | null | undefined;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -107,17 +108,20 @@ export type GetUsersQueryVariables = Exact<{
 }>;
 
 
-export type GetUsersQuery = { __typename?: 'Query', users: { __typename?: 'UserConnection', nodes: Array<{ __typename?: 'User', id: string, name: string, email: string, birthDate: any } | null | undefined>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null | undefined, endCursor?: string | null | undefined } } };
+export type GetUsersQuery = { __typename?: 'Query', users: { __typename?: 'UserConnection', edges: Array<{ __typename?: 'UserEdge', cursor: string, node: { __typename?: 'User', id: string, name: string, email: string, birthDate: any } } | null | undefined>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, hasPreviousPage: boolean, startCursor?: string | null | undefined, endCursor?: string | null | undefined } } };
 
 
 export const GetUsersDocument = gql`
     query GetUsers($first: Int!, $before: String, $after: String, $sortBy: UserSort!) {
   users(first: $first, before: $before, after: $after, sortBy: $sortBy) @connection(key: "users", filter: ["sortBy"]) {
-    nodes {
-      id
-      name
-      email
-      birthDate
+    edges {
+      cursor
+      node {
+        id
+        name
+        email
+        birthDate
+      }
     }
     pageInfo {
       hasNextPage
@@ -151,3 +155,72 @@ export function useGetUsersQuery(variables: GetUsersQueryVariables | VueComposit
   return VueApolloComposable.useQuery<GetUsersQuery, GetUsersQueryVariables>(GetUsersDocument, variables, options);
 }
 export type GetUsersQueryCompositionFunctionResult = VueApolloComposable.UseQueryReturn<GetUsersQuery, GetUsersQueryVariables>;
+export type CreateUserPayloadKeySpecifier = ('user' | CreateUserPayloadKeySpecifier)[];
+export type CreateUserPayloadFieldPolicy = {
+	user?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type MutationKeySpecifier = ('createUser' | MutationKeySpecifier)[];
+export type MutationFieldPolicy = {
+	createUser?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type PageInfoKeySpecifier = ('endCursor' | 'hasNextPage' | 'hasPreviousPage' | 'startCursor' | PageInfoKeySpecifier)[];
+export type PageInfoFieldPolicy = {
+	endCursor?: FieldPolicy<any> | FieldReadFunction<any>,
+	hasNextPage?: FieldPolicy<any> | FieldReadFunction<any>,
+	hasPreviousPage?: FieldPolicy<any> | FieldReadFunction<any>,
+	startCursor?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type QueryKeySpecifier = ('users' | QueryKeySpecifier)[];
+export type QueryFieldPolicy = {
+	users?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type UserKeySpecifier = ('birthDate' | 'email' | 'id' | 'name' | UserKeySpecifier)[];
+export type UserFieldPolicy = {
+	birthDate?: FieldPolicy<any> | FieldReadFunction<any>,
+	email?: FieldPolicy<any> | FieldReadFunction<any>,
+	id?: FieldPolicy<any> | FieldReadFunction<any>,
+	name?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type UserConnectionKeySpecifier = ('edges' | 'nodes' | 'pageInfo' | 'totalCount' | UserConnectionKeySpecifier)[];
+export type UserConnectionFieldPolicy = {
+	edges?: FieldPolicy<any> | FieldReadFunction<any>,
+	nodes?: FieldPolicy<any> | FieldReadFunction<any>,
+	pageInfo?: FieldPolicy<any> | FieldReadFunction<any>,
+	totalCount?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type UserEdgeKeySpecifier = ('cursor' | 'node' | UserEdgeKeySpecifier)[];
+export type UserEdgeFieldPolicy = {
+	cursor?: FieldPolicy<any> | FieldReadFunction<any>,
+	node?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type StrictTypedTypePolicies = {
+	CreateUserPayload?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | CreateUserPayloadKeySpecifier | (() => undefined | CreateUserPayloadKeySpecifier),
+		fields?: CreateUserPayloadFieldPolicy,
+	},
+	Mutation?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | MutationKeySpecifier | (() => undefined | MutationKeySpecifier),
+		fields?: MutationFieldPolicy,
+	},
+	PageInfo?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | PageInfoKeySpecifier | (() => undefined | PageInfoKeySpecifier),
+		fields?: PageInfoFieldPolicy,
+	},
+	Query?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | QueryKeySpecifier | (() => undefined | QueryKeySpecifier),
+		fields?: QueryFieldPolicy,
+	},
+	User?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | UserKeySpecifier | (() => undefined | UserKeySpecifier),
+		fields?: UserFieldPolicy,
+	},
+	UserConnection?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | UserConnectionKeySpecifier | (() => undefined | UserConnectionKeySpecifier),
+		fields?: UserConnectionFieldPolicy,
+	},
+	UserEdge?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | UserEdgeKeySpecifier | (() => undefined | UserEdgeKeySpecifier),
+		fields?: UserEdgeFieldPolicy,
+	}
+};
+export type TypedTypePolicies = StrictTypedTypePolicies & TypePolicies;

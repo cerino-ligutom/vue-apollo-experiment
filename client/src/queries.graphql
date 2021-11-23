@@ -1,10 +1,13 @@
 query GetUsers($first: Int!, $before: String, $after: String, $sortBy: UserSort!) {
   users(first: $first, before: $before, after: $after, sortBy: $sortBy) @connection(key: "users", filter: ["sortBy"]) {
-    nodes {
-      id
-      name
-      email
-      birthDate
+    edges {
+      cursor
+      node {
+        id
+        name
+        email
+        birthDate
+      }
     }
     pageInfo {
       hasNextPage

@@ -35,6 +35,7 @@ generates:
       - 'typescript'
       - 'typescript-operations'
       - 'typescript-vue-apollo'
+      - 'typescript-apollo-client-helpers'
 
   ./client/server-schema.graphql:
     plugins:

@@ -79,6 +79,7 @@ import {
   UserSortField,
   useGetUsersQuery,
 } from '@/generated/graphql';
+import { useGetUsersQuery as useWrappedGetUsersQuery } from '@/composables/use-get-users-query';
 
 export const Component0 = defineComponent({
   name: 'Component0',
@@ -159,7 +160,7 @@ export const Component0 = defineComponent({
        * - just refetch the query from scratch (if no parameters are passed, it'll use the latest state of the variables)
        */
       refetch,
-    } = useGetUsersQuery(customQueryVariables, {
+    } = useWrappedGetUsersQuery(customQueryVariables, {
       /**
        * There are multiple fetch policy options here and you might want to know each one of them.
        * You should use what's appropriate for your use case.
@@ -185,6 +186,10 @@ export const Component0 = defineComponent({
       console.log('Result from Component0:', res);
     });
 
+    // Type helpers
+    type UserQueryNode = Exclude<GetUsersQuery['users']['edges'][0], null | undefined>['node'];
+    type UserQueryPageInfo = GetUsersQuery['users']['pageInfo'];
+
     /**
      * HANDLING RESULT - APPROACH #1 (Ideal for JavaScript and/or no pre-processing)
      *
@@ -204,8 +209,8 @@ export const Component0 = defineComponent({
        * can see (hover on the resulting variable), the `__typename` is optional on the asserted type
        * yet that seems to have been removed on the callback's parameter (`res` in this case).
        */
-      [] as GetUsersQuery['users']['nodes'],
-      (res) => res.users.nodes,
+      [] as UserQueryNode[],
+      (res) => res.users.edges.map((x) => x.node),
     );
     const pageInfoFromUseResult = useResult(
       result,
@@ -214,7 +219,7 @@ export const Component0 = defineComponent({
        * You probably wouldn't want it not typed as it'd resort back to `never[]` and we're back to the original issue.
        */
       // @ts-ignore
-      [] as GetUsersQuery['users']['pageInfo'],
+      [] as UserQueryPageInfo,
       (res) => res.users.pageInfo,
     );
 
@@ -228,8 +233,8 @@ export const Component0 = defineComponent({
      *
      * This is the approach we'll be using in this demo as the type inference is more reliable.
      */
-    const usersFromComputed = computed<GetUsersQuery['users']['nodes']>(() => result.value?.users?.nodes ?? []);
-    const pageInfoFromComputed = computed<GetUsersQuery['users']['pageInfo']>(
+    const usersFromComputed = computed<Array<UserQueryNode | undefined>>(() => result.value?.users.edges.map((x) => x?.node) ?? []);
+    const pageInfoFromComputed = computed<UserQueryPageInfo>(
       () =>
         result.value?.users?.pageInfo ?? {
           hasNextPage: false,
@@ -254,45 +259,17 @@ export const Component0 = defineComponent({
         variables: {
           after: pageInfoFromComputed.value.endCursor,
         },
-
         /**
          * IMPORTANT: The updateQuery callback for fetchMore() is DEPRECATED and will be REMOVED in the next major version of Apollo Client.
-         * You might not want to use this if you're setting up a fresh apollo client but it'll be good to know how to use it as a lot of
-         * projects that uses apollo client v2 (and some from v3) still uses this approach.
+         * You might not want to use this if you're setting up a fresh Apollo Client but it'll be good to know how to use it as a lot of
+         * projects that uses Apollo Client v2 (and some from v3) still uses this approach.
+         *
+         * `updateQuery` can be used to update the result object of this query when using `fetchMore()` (old way of doing it w/ Apollo Client 2).
+         * Please read the implementation from the wrapped composable for an example of its usage.
+         *
+         * An example of the new approach, making use of Field Type Policies, can be found on `src/plugins/apollo.ts`.
          */
-        // `updateQuery` can be used to update the result object of this query when using `fetchMore()`.
-        updateQuery(previousResult, { fetchMoreResult, variables: updatedVariables }) {
-          if (!fetchMoreResult) {
-            return previousResult;
-          }
-
-          /**
-           * IMPORTANT:
-           * Do keep in mind that doing a fetchMore does not update the original variables passed to the `useQuery()` (in this case, the `customQueryVariables`)
-           * nor does it update either the `variables` object that the `useQuery()` returns. You SHOULD NOT also update any of those variables either
-           * from here as that would trigger a refetch of the query and you wouldn't want that to happen.
-           */
-          console.log('variables from using fetchMore()', updatedVariables);
-
-          /**
-           * We'll merge the new data with the existing data.
-           * This should cause a re-render of our component with the merged list.
-           *
-           * IMPORTANT: Make sure to return the complete shape, otherwise it might cause bugs.
-           * One notable bug is not supplying the `__typename` on any of the nodes.
-           * It'd fire the network request twice and won't render properly either.
-           */
-          return {
-            ...previousResult,
-            users: {
-              ...previousResult.users,
-              // Append the new data
-              nodes: [...previousResult.users.nodes, ...fetchMoreResult.users.nodes],
-              // We want the new page info
-              pageInfo: fetchMoreResult.users.pageInfo,
-            },
-          };
-        },
+        // updateQuery: () => throw new Error('Please read the implementation from the composable'),
       });
     }
 
