@@ -170,6 +170,10 @@ const resolvers: GQL_Resolvers = {
 		deleteUser: (parent, { input }, ctx) => {
 			const { userId } = input;
 
+			if (userId .trim().length === 0) {
+				throw new Error('User ID is required.');
+			}
+
 			const [ user ] = pullAt(users, findIndex(users, (user) => user.id === userId));
 
 			return { user }
