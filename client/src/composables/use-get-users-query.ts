@@ -39,7 +39,7 @@ export function useGetUsersQuery(...params: Parameters<typeof _useGetUsersQuery>
       users: {
         ...previousResult.users,
         // Append the new data
-        edges: [...(previousResult.users.edges ?? []), ...fetchMoreResult.users.edges],
+        edges: [...(previousResult?.users?.edges ?? []), ...fetchMoreResult.users.edges],
         // We want the new page info
         pageInfo: fetchMoreResult.users.pageInfo,
       },
@@ -49,6 +49,19 @@ export function useGetUsersQuery(...params: Parameters<typeof _useGetUsersQuery>
   function fetchMore(...fetchMoreParams: Parameters<typeof query.fetchMore>): ReturnType<typeof query.fetchMore> {
     // The consumer of this composable might supply an updateQuery and we shouldn't override that.
     if (fetchMoreParams[0].updateQuery === undefined) {
+      /**
+       * IMPORTANT: Currently, type policies (new approach) are configured as well so you wouldn't
+       * be able to see the difference between the two approaches.
+       *
+       * If you want to test them individually, comment out either:
+       * 1. The line below that assigns the `defaultUpdateQuery` so that you
+       *    can test the new Type Policy approach.
+       * 2. The `typePolicies` object passed on the InMemoryCache constructor found
+       *    on `src/plugins/apollo.ts` so you can test this old updateQuery approach.
+       *
+       * After commenting, hit the `Fetch More` button on the UI again to see them in action.
+       * You'll notice they still have the same effect. Just different way of doing things.
+       */
       fetchMoreParams[0].updateQuery = defaultUpdateQuery;
     }
 
