@@ -60,6 +60,15 @@ const typePolicies: TypedTypePolicies = {
         ),
     },
   },
+
+  User: {
+    /**
+     * You should provide this property if the GraphQL type has a different unique identifier field
+     * besides `id` or `_id`. Read more from the docs below on how to use this:
+     * https://www.apollographql.com/docs/react/caching/cache-configuration/#typepolicy-fields
+     */
+    keyFields: undefined,
+  },
 };
 
 // Cache implementation
