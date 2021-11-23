@@ -49,7 +49,6 @@ export const typeDefs = gql`
 
 	type UserConnection {
 		edges: [UserEdge]!
-		nodes: [User]!
 		pageInfo: PageInfo!
 		totalCount: Int!
 	}

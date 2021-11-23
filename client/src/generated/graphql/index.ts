@@ -77,7 +77,6 @@ export type User = {
 export type UserConnection = {
   __typename?: 'UserConnection';
   edges: Array<Maybe<UserEdge>>;
-  nodes: Array<Maybe<User>>;
   pageInfo: PageInfo;
   totalCount: Scalars['Int'];
 };
@@ -181,10 +180,9 @@ export type UserFieldPolicy = {
 	id?: FieldPolicy<any> | FieldReadFunction<any>,
 	name?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type UserConnectionKeySpecifier = ('edges' | 'nodes' | 'pageInfo' | 'totalCount' | UserConnectionKeySpecifier)[];
+export type UserConnectionKeySpecifier = ('edges' | 'pageInfo' | 'totalCount' | UserConnectionKeySpecifier)[];
 export type UserConnectionFieldPolicy = {
 	edges?: FieldPolicy<any> | FieldReadFunction<any>,
-	nodes?: FieldPolicy<any> | FieldReadFunction<any>,
 	pageInfo?: FieldPolicy<any> | FieldReadFunction<any>,
 	totalCount?: FieldPolicy<any> | FieldReadFunction<any>
 };

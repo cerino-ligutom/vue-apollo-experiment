@@ -121,7 +121,6 @@ const resolvers: GQL_Resolvers = {
 					cursor: base64.encode(getByProperty(user, sortBy.field as any)),
 					node: user,
 				})),
-				nodes: usersToReturn,
 				pageInfo,
 				// There's no search/filter functionality, so just return length of the users
 				totalCount: users.length,

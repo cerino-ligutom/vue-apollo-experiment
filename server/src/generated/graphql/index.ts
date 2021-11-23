@@ -74,7 +74,6 @@ export type GQL_User = {
 export type GQL_UserConnection = {
   __typename?: 'UserConnection';
   edges: Array<Maybe<GQL_UserEdge>>;
-  nodes: Array<Maybe<GQL_User>>;
   pageInfo: GQL_PageInfo;
   totalCount: Scalars['Int'];
 };
@@ -234,7 +233,6 @@ export type GQL_UserResolvers<ContextType = any, ParentType extends GQL_Resolver
 
 export type GQL_UserConnectionResolvers<ContextType = any, ParentType extends GQL_ResolversParentTypes['UserConnection'] = GQL_ResolversParentTypes['UserConnection']> = {
   edges?: Resolver<Array<Maybe<GQL_ResolversTypes['UserEdge']>>, ParentType, ContextType>;
-  nodes?: Resolver<Array<Maybe<GQL_ResolversTypes['User']>>, ParentType, ContextType>;
   pageInfo?: Resolver<GQL_ResolversTypes['PageInfo'], ParentType, ContextType>;
   totalCount?: Resolver<GQL_ResolversTypes['Int'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
