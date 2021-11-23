@@ -72,7 +72,29 @@ export const typeDefs = gql`
 		user: User!
 	}
 
+	input UpdateUserInput {
+		userId: ID!
+		name: String!
+		email: String!
+		birthDate: DateTime!
+	}
+
+	type UpdateUserPayload {
+		user: User!
+	}
+
+	input DeleteUserInput {
+		userId: ID!
+	}
+
+	type DeleteUserPayload {
+		# Not required as the user could've been deleted already and there'd be nothing to return.
+		user: User
+	}
+
 	type Mutation {
 		createUser(input: CreateUserInput!): CreateUserPayload!
+		updateUser(input: UpdateUserInput!): UpdateUserPayload!
+		deleteUser(input: DeleteUserInput!): DeleteUserPayload!
 	}
 `;

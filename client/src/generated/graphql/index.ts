@@ -30,14 +30,35 @@ export type CreateUserPayload = {
   user: User;
 };
 
+export type DeleteUserInput = {
+  userId: Scalars['ID'];
+};
+
+export type DeleteUserPayload = {
+  __typename?: 'DeleteUserPayload';
+  user?: Maybe<User>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   createUser: CreateUserPayload;
+  deleteUser: DeleteUserPayload;
+  updateUser: UpdateUserPayload;
 };
 
 
 export type MutationCreateUserArgs = {
   input: CreateUserInput;
+};
+
+
+export type MutationDeleteUserArgs = {
+  input: DeleteUserInput;
+};
+
+
+export type MutationUpdateUserArgs = {
+  input: UpdateUserInput;
 };
 
 export type PageInfo = {
@@ -65,6 +86,18 @@ export enum SortDirection {
   ASC = 'ASC',
   DESC = 'DESC'
 }
+
+export type UpdateUserInput = {
+  birthDate: Scalars['DateTime'];
+  email: Scalars['String'];
+  name: Scalars['String'];
+  userId: Scalars['ID'];
+};
+
+export type UpdateUserPayload = {
+  __typename?: 'UpdateUserPayload';
+  user: User;
+};
 
 export type User = {
   __typename?: 'User';
@@ -158,9 +191,15 @@ export type CreateUserPayloadKeySpecifier = ('user' | CreateUserPayloadKeySpecif
 export type CreateUserPayloadFieldPolicy = {
 	user?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type MutationKeySpecifier = ('createUser' | MutationKeySpecifier)[];
+export type DeleteUserPayloadKeySpecifier = ('user' | DeleteUserPayloadKeySpecifier)[];
+export type DeleteUserPayloadFieldPolicy = {
+	user?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type MutationKeySpecifier = ('createUser' | 'deleteUser' | 'updateUser' | MutationKeySpecifier)[];
 export type MutationFieldPolicy = {
-	createUser?: FieldPolicy<any> | FieldReadFunction<any>
+	createUser?: FieldPolicy<any> | FieldReadFunction<any>,
+	deleteUser?: FieldPolicy<any> | FieldReadFunction<any>,
+	updateUser?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type PageInfoKeySpecifier = ('endCursor' | 'hasNextPage' | 'hasPreviousPage' | 'startCursor' | PageInfoKeySpecifier)[];
 export type PageInfoFieldPolicy = {
@@ -172,6 +211,10 @@ export type PageInfoFieldPolicy = {
 export type QueryKeySpecifier = ('users' | QueryKeySpecifier)[];
 export type QueryFieldPolicy = {
 	users?: FieldPolicy<any> | FieldReadFunction<any>
+};
+export type UpdateUserPayloadKeySpecifier = ('user' | UpdateUserPayloadKeySpecifier)[];
+export type UpdateUserPayloadFieldPolicy = {
+	user?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type UserKeySpecifier = ('birthDate' | 'email' | 'id' | 'name' | UserKeySpecifier)[];
 export type UserFieldPolicy = {
@@ -196,6 +239,10 @@ export type StrictTypedTypePolicies = {
 		keyFields?: false | CreateUserPayloadKeySpecifier | (() => undefined | CreateUserPayloadKeySpecifier),
 		fields?: CreateUserPayloadFieldPolicy,
 	},
+	DeleteUserPayload?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | DeleteUserPayloadKeySpecifier | (() => undefined | DeleteUserPayloadKeySpecifier),
+		fields?: DeleteUserPayloadFieldPolicy,
+	},
 	Mutation?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | MutationKeySpecifier | (() => undefined | MutationKeySpecifier),
 		fields?: MutationFieldPolicy,
@@ -207,6 +254,10 @@ export type StrictTypedTypePolicies = {
 	Query?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | QueryKeySpecifier | (() => undefined | QueryKeySpecifier),
 		fields?: QueryFieldPolicy,
+	},
+	UpdateUserPayload?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | UpdateUserPayloadKeySpecifier | (() => undefined | UpdateUserPayloadKeySpecifier),
+		fields?: UpdateUserPayloadFieldPolicy,
 	},
 	User?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | UserKeySpecifier | (() => undefined | UserKeySpecifier),

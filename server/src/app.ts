@@ -19,6 +19,8 @@ import {
 	first as getFirstItem,
 	last as getLastItem,
 	get as getByProperty,
+	pullAt,
+	merge
 } from 'lodash';
 import { users } from './data';
 import { base64 } from './utils';
@@ -131,13 +133,14 @@ const resolvers: GQL_Resolvers = {
 	},
 
 	Mutation: {
-		createUser: async (parent, { input }, ctx) => {
+		createUser: (parent, { input }, ctx) => {
 			const { name, email, birthDate } = input;
 
 			const newUser: GQL_User = {
 				id: faker.datatype.uuid(),
 				// ignore the type assertion to "any" below
-				// we're actually storing it as a string but the generated TS types are mapped to type "Date" with graphql code generator
+				// we're actually storing it as a string but the generated TS types 
+				// are mapped to type "Date" with graphql code generator
 				birthDate: birthDate.toISOString() as any,
 				email,
 				name,
@@ -148,6 +151,28 @@ const resolvers: GQL_Resolvers = {
 			return {
 				user: newUser,
 			};
+		},
+		updateUser: (parent, { input }, ctx) => {
+			const { userId, name, email, birthDate } = input;
+
+			const user = users.find((user) => user.id === userId);
+
+			if (!user) {
+				throw new Error(`User ${userId} not found.`)
+			}
+
+			merge(user, {
+				name, email, birthDate: birthDate.toISOString() as any,
+			});
+
+			return { user };
+		},
+		deleteUser: (parent, { input }, ctx) => {
+			const { userId } = input;
+
+			const [ user ] = pullAt(users, findIndex(users, (user) => user.id === userId));
+
+			return { user }
 		},
 	},
 

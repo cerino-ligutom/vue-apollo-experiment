@@ -30,14 +30,35 @@ export type GQL_CreateUserPayload = {
   user: GQL_User;
 };
 
+export type GQL_DeleteUserInput = {
+  userId: Scalars['ID'];
+};
+
+export type GQL_DeleteUserPayload = {
+  __typename?: 'DeleteUserPayload';
+  user?: Maybe<GQL_User>;
+};
+
 export type GQL_Mutation = {
   __typename?: 'Mutation';
   createUser: GQL_CreateUserPayload;
+  deleteUser: GQL_DeleteUserPayload;
+  updateUser: GQL_UpdateUserPayload;
 };
 
 
 export type GQL_MutationCreateUserArgs = {
   input: GQL_CreateUserInput;
+};
+
+
+export type GQL_MutationDeleteUserArgs = {
+  input: GQL_DeleteUserInput;
+};
+
+
+export type GQL_MutationUpdateUserArgs = {
+  input: GQL_UpdateUserInput;
 };
 
 export type GQL_PageInfo = {
@@ -62,6 +83,18 @@ export type GQL_QueryUsersArgs = {
 };
 
 export { SortDirection };
+
+export type GQL_UpdateUserInput = {
+  birthDate: Scalars['DateTime'];
+  email: Scalars['String'];
+  name: Scalars['String'];
+  userId: Scalars['ID'];
+};
+
+export type GQL_UpdateUserPayload = {
+  __typename?: 'UpdateUserPayload';
+  user: GQL_User;
+};
 
 export type GQL_User = {
   __typename?: 'User';
@@ -164,6 +197,8 @@ export type GQL_ResolversTypes = {
   CreateUserInput: GQL_CreateUserInput;
   CreateUserPayload: ResolverTypeWrapper<GQL_CreateUserPayload>;
   DateTime: ResolverTypeWrapper<Scalars['DateTime']>;
+  DeleteUserInput: GQL_DeleteUserInput;
+  DeleteUserPayload: ResolverTypeWrapper<GQL_DeleteUserPayload>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Mutation: ResolverTypeWrapper<{}>;
@@ -171,6 +206,8 @@ export type GQL_ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   SortDirection: SortDirection;
   String: ResolverTypeWrapper<Scalars['String']>;
+  UpdateUserInput: GQL_UpdateUserInput;
+  UpdateUserPayload: ResolverTypeWrapper<GQL_UpdateUserPayload>;
   User: ResolverTypeWrapper<GQL_User>;
   UserConnection: ResolverTypeWrapper<GQL_UserConnection>;
   UserEdge: ResolverTypeWrapper<GQL_UserEdge>;
@@ -184,12 +221,16 @@ export type GQL_ResolversParentTypes = {
   CreateUserInput: GQL_CreateUserInput;
   CreateUserPayload: GQL_CreateUserPayload;
   DateTime: Scalars['DateTime'];
+  DeleteUserInput: GQL_DeleteUserInput;
+  DeleteUserPayload: GQL_DeleteUserPayload;
   ID: Scalars['ID'];
   Int: Scalars['Int'];
   Mutation: {};
   PageInfo: GQL_PageInfo;
   Query: {};
   String: Scalars['String'];
+  UpdateUserInput: GQL_UpdateUserInput;
+  UpdateUserPayload: GQL_UpdateUserPayload;
   User: GQL_User;
   UserConnection: GQL_UserConnection;
   UserEdge: GQL_UserEdge;
@@ -205,8 +246,15 @@ export interface GQL_DateTimeScalarConfig extends GraphQLScalarTypeConfig<GQL_Re
   name: 'DateTime';
 }
 
+export type GQL_DeleteUserPayloadResolvers<ContextType = any, ParentType extends GQL_ResolversParentTypes['DeleteUserPayload'] = GQL_ResolversParentTypes['DeleteUserPayload']> = {
+  user?: Resolver<Maybe<GQL_ResolversTypes['User']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type GQL_MutationResolvers<ContextType = any, ParentType extends GQL_ResolversParentTypes['Mutation'] = GQL_ResolversParentTypes['Mutation']> = {
   createUser?: Resolver<GQL_ResolversTypes['CreateUserPayload'], ParentType, ContextType, RequireFields<GQL_MutationCreateUserArgs, 'input'>>;
+  deleteUser?: Resolver<GQL_ResolversTypes['DeleteUserPayload'], ParentType, ContextType, RequireFields<GQL_MutationDeleteUserArgs, 'input'>>;
+  updateUser?: Resolver<GQL_ResolversTypes['UpdateUserPayload'], ParentType, ContextType, RequireFields<GQL_MutationUpdateUserArgs, 'input'>>;
 };
 
 export type GQL_PageInfoResolvers<ContextType = any, ParentType extends GQL_ResolversParentTypes['PageInfo'] = GQL_ResolversParentTypes['PageInfo']> = {
@@ -222,6 +270,11 @@ export type GQL_QueryResolvers<ContextType = any, ParentType extends GQL_Resolve
 };
 
 export type GQL_SortDirectionResolvers = EnumResolverSignature<{ ASC?: any, DESC?: any }, GQL_ResolversTypes['SortDirection']>;
+
+export type GQL_UpdateUserPayloadResolvers<ContextType = any, ParentType extends GQL_ResolversParentTypes['UpdateUserPayload'] = GQL_ResolversParentTypes['UpdateUserPayload']> = {
+  user?: Resolver<GQL_ResolversTypes['User'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
 
 export type GQL_UserResolvers<ContextType = any, ParentType extends GQL_ResolversParentTypes['User'] = GQL_ResolversParentTypes['User']> = {
   birthDate?: Resolver<GQL_ResolversTypes['DateTime'], ParentType, ContextType>;
@@ -249,10 +302,12 @@ export type GQL_UserSortFieldResolvers = EnumResolverSignature<{ BIRTH_DATE?: an
 export type GQL_Resolvers<ContextType = any> = {
   CreateUserPayload?: GQL_CreateUserPayloadResolvers<ContextType>;
   DateTime?: GraphQLScalarType;
+  DeleteUserPayload?: GQL_DeleteUserPayloadResolvers<ContextType>;
   Mutation?: GQL_MutationResolvers<ContextType>;
   PageInfo?: GQL_PageInfoResolvers<ContextType>;
   Query?: GQL_QueryResolvers<ContextType>;
   SortDirection?: GQL_SortDirectionResolvers;
+  UpdateUserPayload?: GQL_UpdateUserPayloadResolvers<ContextType>;
   User?: GQL_UserResolvers<ContextType>;
   UserConnection?: GQL_UserConnectionResolvers<ContextType>;
   UserEdge?: GQL_UserEdgeResolvers<ContextType>;

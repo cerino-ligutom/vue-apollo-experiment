@@ -10,8 +10,18 @@ type CreateUserPayload {
 
 scalar DateTime
 
+input DeleteUserInput {
+  userId: ID!
+}
+
+type DeleteUserPayload {
+  user: User
+}
+
 type Mutation {
   createUser(input: CreateUserInput!): CreateUserPayload!
+  deleteUser(input: DeleteUserInput!): DeleteUserPayload!
+  updateUser(input: UpdateUserInput!): UpdateUserPayload!
 }
 
 type PageInfo {
@@ -28,6 +38,17 @@ type Query {
 enum SortDirection {
   ASC
   DESC
+}
+
+input UpdateUserInput {
+  birthDate: DateTime!
+  email: String!
+  name: String!
+  userId: ID!
+}
+
+type UpdateUserPayload {
+  user: User!
 }
 
 type User {
