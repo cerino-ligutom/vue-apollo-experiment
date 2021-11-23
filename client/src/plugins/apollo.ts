@@ -43,22 +43,21 @@ const typePolicies: TypedTypePolicies = {
        * make modifications to their implementation.
        * https://github.com/apollographql/apollo-client/blob/8fc56eda7cc34c7a6c952703c797c04edffa462d/src/utilities/policies/pagination.ts#L24
        */
-      users: () => {
-        /**
-         * keyArgs here is more or less similar to the @connection directive that you used to do in
-         * the old way (updateQuery + directive on the GraphQL query doc). But instead of repeating
-         * the directive on the GraphQL query doc every time you make this particular query ("users" in
-         * this case), you can centralize it here.
-         */
-        const keyArgs = ['sortBy'];
-
+      users:
         /**
          * This function actually returns a FieldPolicy object implementing both the `read` and `merge` functions
          * as well as just including the keyArgs you specify into the FieldPolicy object. Read more from the docs:
          * https://www.apollographql.com/docs/react/caching/cache-field-behavior/
          */
-        return relayStylePagination(keyArgs);
-      },
+        relayStylePagination(
+          /**
+           * keyArgs here is more or less similar to the @connection directive that you used to do in
+           * the old way (updateQuery + directive on the GraphQL query doc). But instead of repeating
+           * the directive on the GraphQL query doc every time you make this particular query ("users" in
+           * this case), you can centralize it here.
+           */
+          ['sortBy'],
+        ),
     },
   },
 };
