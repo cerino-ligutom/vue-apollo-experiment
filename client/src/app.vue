@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <Component0 />
-    <!-- <Component1 /> -->
-    <!-- <Component2 /> -->
+    <hr />
+    <Component1 />
   </div>
 </template>
 
@@ -10,14 +10,12 @@
 import { defineComponent } from 'vue';
 import Component0 from '@/components/component-0.vue';
 import Component1 from '@/components/component-1.vue';
-import Component2 from '@/components/component-2.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
     Component0,
-    // Component1,
-    // Component2,
+    Component1,
   },
 });
 </script>

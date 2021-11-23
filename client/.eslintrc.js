@@ -17,5 +17,6 @@ module.exports = {
     '@typescript-eslint/ban-ts-comment': 'off',
 
     'implicit-arrow-linebreak': 'off',
+    'object-curly-newline': 'off',
   },
 };
