@@ -89,7 +89,8 @@ export const Component0 = defineComponent({
   setup() {
     /**
      * You might be tempted to do this. Just know that this can have a side effect that you may not want.
-     * Particularly, take for example if the
+     * Particularly, if this is passed as a variable to a useQuery and any of the props here change, it'd
+     * trigger a refetch on the query. Ultimately, YMMV.
      */
     const customQueryVariables = reactive<GetUsersQueryVariables>({
       first: 5,
