@@ -32,7 +32,7 @@ This should start the client on port 8080.
 
 ## Updating the TypeScript types for queries/mutations on the client and/or the schema on the server
 
-The TypeScript types are generated using GraphQL Code Generator which is installed on the root directory so if you want to play with the queries/mutations or server schema, you'll have to install the dependencies and run the codegen first to get the updated types.
+The TypeScript types are generated using GraphQL Code Generator which is installed on the root directory so if you want to play with the queries/mutations or server schema, you'll have to install the dependencies and run the codegen first to get the updated types. Do the commands below on the root directory.
 
 Install dependencies:
 
