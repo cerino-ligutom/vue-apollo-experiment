@@ -25,6 +25,8 @@ const typePolicies: TypedTypePolicies = {
   Query: {
     fields: {
       /**
+       * We're trying to handle pagination here so this'll be a bit different.
+       *
        * This is a big PITA if you're coming from the old way of doing things (updateQuery from Apollo Client 2) and
        * have an existing codebase with it and you plan to migrate to Apollo Client 3 or higher.
        * Same sentiment as this comment: https://github.com/apollographql/apollo-client/issues/6502#issuecomment-683913176
@@ -58,6 +60,27 @@ const typePolicies: TypedTypePolicies = {
            */
           ['sortBy'],
         ),
+
+      /**
+       * If you're just trying to merge arrays (common for non root query fields), then you could easily do it like the one below:
+       * https://www.apollographql.com/docs/react/caching/cache-field-behavior/#merging-arrays
+       */
+      // { merge: (existing = [], incoming: any[]) => [...existing, ...incoming] },
+
+      /**
+       * If you're trying to merge non-normalized objects, then this depends on the behavior you want.
+       * You could read more here: https://www.apollographql.com/docs/react/caching/cache-field-behavior/#merging-non-normalized-objects
+       *
+       * But a summary of this is, to pass:
+       * - false  // If you want to prefer incoming over existing data. (replace what we have in the cache with incoming data)
+       * - true   // If you want to merge incoming to existing data.
+       */
+      // { merge: false },
+
+      /**
+       * If you're trying to merge arrays of non-normalized objects, then this depends on the behavior you want and you'll have to be hands-on.
+       * https://www.apollographql.com/docs/react/caching/cache-field-behavior/#merging-arrays-of-non-normalized-objects
+       */
     },
   },
 
