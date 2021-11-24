@@ -1,21 +1,21 @@
 <template>
   <div class="container">
-    <Component0 />
+    <DemoUseQuery />
     <hr />
-    <Component1 />
+    <DemoUseMutation />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import Component0 from '@/components/component-0.vue';
-import Component1 from '@/components/component-1.vue';
+import DemoUseQuery from '@/components/demo-use-query.vue';
+import DemoUseMutation from '@/components/demo-use-mutation.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
-    Component0,
-    Component1,
+    DemoUseQuery,
+    DemoUseMutation,
   },
 });
 </script>

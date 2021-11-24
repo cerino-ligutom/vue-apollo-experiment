@@ -1,5 +1,5 @@
 <template>
-  <h2>vue-apollo Mutation Basics</h2>
+  <h2>vue-apollo Mutation</h2>
 
   <div v-if="!hasSuccessfullyDeletedUser" class="row alert alert-info m-0 mb-3">
     <div class="col-md-12">Copy a User ID above and paste it on the field below then delete the user.</div>
@@ -43,8 +43,8 @@ import {
   UserConnection,
 } from '@/generated/graphql';
 
-export const Component1 = defineComponent({
-  name: 'Component1',
+export const DemoUseMutation = defineComponent({
+  name: 'DemoUseMutation',
   setup() {
     const hasSuccessfullyDeletedUser = ref(false);
     const userId = ref<string>('');
@@ -257,7 +257,7 @@ export const Component1 = defineComponent({
     });
     onDone((res) => {
       // Do some side effects when the query is successful
-      console.log('Result from Component1:', res);
+      console.log('Result from DemoUseMutation:', res);
 
       if (res.data?.deleteUser.user) {
         hasSuccessfullyDeletedUser.value = true;
@@ -274,7 +274,7 @@ export const Component1 = defineComponent({
     };
   },
 });
-export default Component1;
+export default DemoUseMutation;
 </script>
 
 <style lang="scss" scoped></style>

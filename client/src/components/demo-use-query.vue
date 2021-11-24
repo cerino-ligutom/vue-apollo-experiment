@@ -1,5 +1,5 @@
 <template>
-  <h2>vue-apollo Query Basics</h2>
+  <h2>vue-apollo Query</h2>
 
   <div class="row mb-3">
     <div class="col-md-3">
@@ -81,8 +81,8 @@ import {
 } from '@/generated/graphql';
 import { useGetUsersQuery as useWrappedGetUsersQuery } from '@/composables/use-get-users-query';
 
-export const Component0 = defineComponent({
-  name: 'Component0',
+export const DemoUseQuery = defineComponent({
+  name: 'DemoUseQuery',
   components: {
     UserTable,
   },
@@ -184,7 +184,7 @@ export const Component0 = defineComponent({
     });
     onResult((res) => {
       // Do some side effects when the query is successful
-      console.log('Result from Component0:', res);
+      console.log('Result from DemoUseQuery:', res);
     });
 
     // Type helpers
@@ -288,7 +288,7 @@ export const Component0 = defineComponent({
     };
   },
 });
-export default Component0;
+export default DemoUseQuery;
 </script>
 
 <style lang="scss" scoped>
