@@ -1,6 +1,18 @@
 <template>
   <h2>vue-apollo Query</h2>
 
+  <div class="row alert alert-info m-0 mb-3">
+    <div class="col-md-12">
+      Changing any of the properties from a reactive variable passed to a
+      <code>useQuery</code>
+      s' parameter will trigger a refetch. Same goes with the
+      <code>variables</code>
+      returned by the
+      <code>useQuery</code>
+      . Try fetching more data.
+    </div>
+  </div>
+
   <div class="row mb-3">
     <div class="col-md-3">
       <label for="numberOfItems" class="form-label">Number of users to fetch</label>
