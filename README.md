@@ -15,7 +15,7 @@ npm start
 
 This should start the server on port 3000. The GraphQL endpoint is `http://localhost:3000/graphql`.
 
-The server uses in-memory for storing the data and is seeded every time you run the server using FakerJS.
+The server uses in-memory for storing the data and is seeded every time you run the server using FakerJS so you don't have anything extra setup to worry about when running the server.
 
 ## Running the client
 
