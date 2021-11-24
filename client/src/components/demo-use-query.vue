@@ -39,9 +39,13 @@
       <code>useQuery</code>
       do not get updated when using
       <code>fetchMore()</code>
-      . See code comments on
+      . However, if you check the console logs, you can see that the variables from using
+      <code>fetchMore()</code>
+      now has the
+      <code>after</code>
+      property populated. See code comments on
       <code>updateQuery()</code>
-      of this component.
+      of this component for more info.
     </div>
     <div class="col-md-6">
       <div><code>variables (from useQuery):</code></div>
