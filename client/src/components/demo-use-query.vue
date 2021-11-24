@@ -2,6 +2,8 @@
   <h2>vue-apollo Query</h2>
 
   <div class="row alert alert-info m-0 mb-3">
+    <div class="col-md-12">I recommend opening the developer tools and monitoring the console logs while you play with this demo.</div>
+    <hr class="my-2"/>
     <div class="col-md-12">
       Changing any of the properties from a reactive variable passed to a
       <code>useQuery</code>
@@ -9,7 +11,7 @@
       <code>variables</code>
       returned by the
       <code>useQuery</code>
-      . Try fetching more data.
+      . Trying playing with the parameters and see it in action. Afterwards, try fetching more data.
     </div>
   </div>
 
@@ -43,9 +45,9 @@
 
   <div class="row alert alert-warning m-0">
     <div v-if="users.length > (variables?.first ?? 0)" class="col-md-12 alert alert-danger">
-      Both our custom
+      Both the
       <code>customQueryVariables</code>
-      and the
+      that we manually created and the
       <code>variables</code>
       returned by
       <code>useQuery</code>
